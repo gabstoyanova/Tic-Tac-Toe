@@ -5,22 +5,19 @@ export default class Board {
     constructor(player1, player2, cellsPerRow) {
         this.cells = [];
         this.cellsPerRow = cellsPerRow;
-        this.boardArray = [...Array(cellsPerRow)].map(x => Array(cellsPerRow).fill(''));
+        this.boardArray = [...Array(+cellsPerRow)].fill('').map(x => Array(+cellsPerRow).fill(''));
         this.player1 = player1
         this.player2 = player2
-        this.cellSize = 0;
+        this.cellSize = document.getElementById('canvas').width / cellsPerRow;
     }
 
     clearBoard() {
         this.cells.forEach(c => c.isFree = true);
-        this.boardArray = [...Array(this.cellsPerRow)].map(x => Array(this.cellsPerRow).fill(''));
+        this.boardArray = [...Array(+this.cellsPerRow)].map(x => Array(+this.cellsPerRow).fill(''));
     }
 
     getCells(ctx) {
-
         let cells = [];
-        let canvasSize = document.getElementById('canvas').width;
-        this.cellSize = canvasSize / this.cellsPerRow;
 
         for (let i = 0; i < this.cellsPerRow; i++) {
             cells[i] = [this.cellsPerRow];
@@ -47,29 +44,25 @@ export default class Board {
         this.cells = cells;
     }
 
-
     drawLines(ctx) {
-
         let linesOffset = 15;
         let canvasSize = document.getElementById('canvas').width;
 
-        let cellsPerRow = this.cellsPerRow;
-        let cellSize = this.cellSize;
         ctx.lineWidth = 7;
         ctx.strokeStyle = '#af8350';
         ctx.lineCap = "round";
         ctx.beginPath();
 
         // horizontal lines
-        for (var line = 1; line < cellsPerRow; line++) {
-            ctx.moveTo(linesOffset, line * cellSize);
-            ctx.lineTo(canvasSize - linesOffset, line * cellSize);
+        for (var line = 1; line < this.cellsPerRow; line++) {
+            ctx.moveTo(linesOffset, line * this.cellSize);
+            ctx.lineTo(canvasSize - linesOffset, line * this.cellSize);
         }
 
         //vertical lines
-        for (var line = 1; line < cellsPerRow; line++) {
-            ctx.moveTo(line * cellSize, linesOffset);
-            ctx.lineTo(line * cellSize, canvasSize - linesOffset);
+        for (var line = 1; line < this.cellsPerRow; line++) {
+            ctx.moveTo(line * this.cellSize, linesOffset);
+            ctx.lineTo(line * this.cellSize, canvasSize - linesOffset);
         }
         ctx.stroke();
     }

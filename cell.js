@@ -14,8 +14,6 @@ export default class Cell {
         }
 
         this.isFree = true;
-        this.offset = 50;
-        this.mouseIn = false;
         this.size = endX - startX;
     }
 
@@ -23,21 +21,21 @@ export default class Cell {
 
         let ctx = utils.context;
         let sectionSize = this.size;
+        let offset = sectionSize / 4;
 
         ctx.strokeStyle = "#bf4059";
         ctx.lineWidth = utils.lineWidth;
         ctx.beginPath();
-        ctx.moveTo(this.startPoint.x + this.offset, this.startPoint.y + this.offset);
-        ctx.lineTo(this.startPoint.x + sectionSize - this.offset, this.startPoint.y + sectionSize - this.offset);
-        ctx.moveTo(this.startPoint.x + sectionSize - this.offset, this.startPoint.y + this.offset);
-        ctx.lineTo(this.startPoint.x + this.offset, this.startPoint.y + sectionSize - this.offset);
+        ctx.moveTo(this.startPoint.x + offset, this.startPoint.y + offset);
+        ctx.lineTo(this.startPoint.x + sectionSize - offset, this.startPoint.y + sectionSize - offset);
+        ctx.moveTo(this.startPoint.x + sectionSize - offset, this.startPoint.y + offset);
+        ctx.lineTo(this.startPoint.x + offset, this.startPoint.y + sectionSize - offset);
         ctx.stroke();
     }
 
     drawO(utils) {
 
-        let ctx = utils.context;
-        // let lineWidth = utils.lineWidth;      
+        let ctx = utils.context;     
         let sectionSize = this.size;
 
         let radius = sectionSize / 4;

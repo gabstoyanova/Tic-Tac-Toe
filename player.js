@@ -4,7 +4,6 @@ export default class Player {
         this.name = name;
         this.team = team;
         this.onTurn = false;
-        this.wins = false;
     }
 
     addPiece(cell, attributes) {

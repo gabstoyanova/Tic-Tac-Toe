@@ -3,10 +3,19 @@
     <head>
         <title></title>
         <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <canvas id="canvas" width= '600'></canvas>
         <script src='./game.js' type="module"></script>
 
+        <div>
+            <button class="button">New game</button>
+            <form id='myForm'>
+                <label for='grid'>Enter number of cells per row</label><br>
+                <input type='number' id='grid' name='grid' value='3'> 
+                <button class="button submit">Submit</button>
+            </form>
+            </div>
     </body>
 </html>
