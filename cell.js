@@ -1,8 +1,6 @@
 export default class Cell {
-
-
+    
     constructor(startX, startY, endX, endY) {
-        
         /* coordinates of top left and bottom right corners */
         this.startPoint = {
             x: startX,
@@ -17,14 +15,12 @@ export default class Cell {
         this.size = endX - startX;
     }
 
-    drawX(utils) {
-
-        let ctx = utils.context;
+    drawX(ctx) {
         let sectionSize = this.size;
         let offset = sectionSize / 4;
 
         ctx.strokeStyle = "#bf4059";
-        ctx.lineWidth = utils.lineWidth;
+        ctx.lineWidth = 7;
         ctx.beginPath();
         ctx.moveTo(this.startPoint.x + offset, this.startPoint.y + offset);
         ctx.lineTo(this.startPoint.x + sectionSize - offset, this.startPoint.y + sectionSize - offset);
@@ -33,11 +29,8 @@ export default class Cell {
         ctx.stroke();
     }
 
-    drawO(utils) {
-
-        let ctx = utils.context;     
+    drawO(ctx) {    
         let sectionSize = this.size;
-
         let radius = sectionSize / 4;
         let center = {
             x: (this.startPoint.x + this.endPoint.x) / 2,
@@ -45,7 +38,7 @@ export default class Cell {
         }
 
         ctx.strokeStyle = "#01bBC2";
-        ctx.lineWidth = utils.lineWidth;
+        ctx.lineWidth = 7;
         ctx.beginPath();
         ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI);
         ctx.stroke();

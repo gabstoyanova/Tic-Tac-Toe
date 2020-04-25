@@ -1,17 +1,15 @@
 import Player from "./player.js";
 import Board from "./board.js";
 
+const GAME_SIZE = document.getElementById('canvas').width;
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 
-const GAME_SIZE = document.getElementById('canvas').width;
-const LINEWIDTH = 7;
-
 canvas.height = GAME_SIZE;
-let cellsPerRow = 3;
 
-let player1 = new Player('me', 'X');
-let player2 = new Player('pesho', 'O');
+let cellsPerRow = 3;
+let player1 = new Player('X');
+let player2 = new Player('O');
 
 function createBoard(numCells) {
     let board = new Board(player1, player2, numCells);
@@ -22,11 +20,6 @@ function createBoard(numCells) {
 }
 
 let board = createBoard(cellsPerRow);
-
-let attributes = {
-    context: ctx,
-    lineWidth: LINEWIDTH,
-};
 
 function getCanvasMousePosition(canvas, event) {
     var rect = canvas.getBoundingClientRect();
@@ -107,7 +100,7 @@ canvas.addEventListener('click', function (e) {
             ) {
                 if (cell.isFree) {
                     if (player1.onTurn) {
-                        player1.addPiece(cell, attributes);
+                        player1.addPiece(cell, ctx);
                         board.boardArray[i][j] = 'X';
                         cell.isFree = false;
 
@@ -127,7 +120,7 @@ canvas.addEventListener('click', function (e) {
                         console.log(board.boardArray);
 
                     } else if (player2.onTurn) {
-                        player2.addPiece(cell, attributes);
+                        player2.addPiece(cell, ctx);
                         board.boardArray[i][j] = 'O';
                         cell.isFree = false;
                         let freeCells = [].concat(...board.cells).filter(cell => cell.isFree);

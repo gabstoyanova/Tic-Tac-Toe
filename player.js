@@ -1,18 +1,17 @@
 export default class Player {
 
-    constructor(name, team) {
-        this.name = name;
+    constructor(team) {
         this.team = team;
         this.onTurn = false;
     }
 
-    addPiece(cell, attributes) {
+    addPiece(cell, ctx) {
         switch (this.team) {
             case 'X':
-                cell.drawX(attributes);
+                cell.drawX(ctx);
                 break;
             case 'O':
-                cell.drawO(attributes);
+                cell.drawO(ctx);
                 break;
         }
     }
